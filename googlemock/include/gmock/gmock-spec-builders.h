@@ -1832,8 +1832,7 @@ R FunctionMocker<R(Args...)>::InvokeWith(ArgumentTuple&& args)
     }
   });
 
-  return PerformActionAndPrintResult(untyped_action, std::move(args), ss.str(),
-                                     ss);
+  return PerformActionAndPrintResult(untyped_action, std::move(args), ss.str());
 }
 
 }  // namespace internal
