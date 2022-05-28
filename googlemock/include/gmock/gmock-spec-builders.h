@@ -1773,7 +1773,7 @@ R FunctionMocker<R(Args...)>::InvokeWith(ArgumentTuple&& args)
     const Cleanup report_uninteresting_call(
         [&] { ReportUninterestingCall(reaction, ss.str()); });
 
-    return PerformActionAndPrintResult(nullptr, std::move(args), ss.str(), ss);
+    return PerformActionAndPrintResult(nullptr, std::move(args), ss.str());
   }
 
   bool is_excessive = false;
@@ -1832,7 +1832,8 @@ R FunctionMocker<R(Args...)>::InvokeWith(ArgumentTuple&& args)
     }
   });
 
-  return PerformActionAndPrintResult(untyped_action, std::move(args), ss.str());
+  return PerformActionAndPrintResult(untyped_action, std::move(args), ss.str(),
+                                     ss);
 }
 
 }  // namespace internal
