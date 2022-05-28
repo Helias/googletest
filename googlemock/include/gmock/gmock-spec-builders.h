@@ -1709,7 +1709,8 @@ class FunctionMocker<R(Args...)> final : public UntypedFunctionMockerBase {
                 internal::negation<can_print_result<T>>::value, int>::type = 0>
   R PerformActionAndPrintResult(const void* const untyped_action,
                                 ArgumentTuple&& args,
-                                const std::string& call_description) {
+                                const std::string& call_description,
+                                std::ostream& /* os */) {
     return PerformAction(untyped_action, std::move(args), call_description);
   }
 
@@ -1773,7 +1774,7 @@ R FunctionMocker<R(Args...)>::InvokeWith(ArgumentTuple&& args)
     const Cleanup report_uninteresting_call(
         [&] { ReportUninterestingCall(reaction, ss.str()); });
 
-    return PerformActionAndPrintResult(nullptr, std::move(args), ss.str());
+    return PerformActionAndPrintResult(nullptr, std::move(args), ss.str(), ss);
   }
 
   bool is_excessive = false;
